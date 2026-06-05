@@ -18,10 +18,14 @@ jobs:
   install_dependancies:
     runs-on: ubuntu-latest
     steps:
-      - name: Install raylib dependencies
+      - name: Install Raylib Dependencies and Build Raylib
         run: |
           sudo apt-get update
-          sudo apt-get install -y libraylib-dev
+          sudo apt-get install -y libasound2-dev libx11-dev libxrandr-dev libxi-dev libxcursor-dev libxinerama-dev libxkbcommon-dev
+          git clone --depth 1 https://github.com/raysan5/raylib.git
+          cd raylib/src
+          make PLATFORM=PLATFORM_DESKTOP
+          sudo make install
 
   check_compilation:
     container: epitechcontent/epitest-docker:latest
