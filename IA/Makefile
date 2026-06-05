@@ -15,20 +15,24 @@
 ##                                                                                     ##
 ## ----------------------------------------------------------------------------------- ##
 
-all:
-	make -C GUI
-	make -C IA
-	make -C SERVER
+NAME    = ia
+
+CXX     = g++
+CXXFLAGS = -Wall -Wextra -std=c++17
+
+SRCS    = src/Main.cpp
+OBJS    = $(SRCS:.cpp=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CXX) $(OBJS) -o $(NAME)
 
 clean:
-	make -C GUI clean
-	make -C IA clean
-	make -C SERVER clean
+	rm -f $(OBJS)
 
-fclean:
-	make -C GUI fclean
-	make -C IA fclean
-	make -C SERVER fclean
+fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
